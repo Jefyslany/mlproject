@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Tax Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>GST Tax Converter</h2>
+        <form method="POST">
+            <label>GST Rate (%)</label>
+            <input type="number" name="gst_rate" step="0.01" required>
+
+            <h4>Calculate GST from Base Price:</h4>
+            <input type="number" name="base_price" step="0.01" placeholder="Enter Base Price">
+            <button type="submit">Calculate</button>
+
+            <h4>Reverse GST (Find Base Price from Total Price):</h4>
+            <input type="number" name="total_price" step="0.01" placeholder="Enter Total Price">
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <p>Base Price: ₹{{ result.base_price | round(2) }}</p>
+            <p>GST Amount: ₹{{ result.gst_amount | round(2) }}</p>
+            <p>Total Price (incl. GST): ₹{{ result.total_price | round(2) }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
